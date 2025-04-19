@@ -9,15 +9,36 @@
             max-width: 800px;
             margin: 0 auto;
         }
+
+        #logo {
+            display: block;
+            max-width: 300px;
+            margin: 20px auto;
+        }
     </style>
 </head>
 <body>
 <div class="container">
-    <div data-uppi-status="webmethod"></div>
+    <img src="/wmc.png" alt="Webmethod logo" id="logo">
+    <div id="uppi-container"></div>
 </div>
 
-<script src="https://uppi.dev/embed/01jevha6t8qa251dz1a1p7bw6v/embed.js" async></script>
-<script async defer src="https://sa.webmethod.eu/latest.js"></script>
+<script>
+    const params = new URLSearchParams(window.location.search);
+    const wmc = params.get('wmc');
+    const slug = wmc ? `wmc-${wmc}` : 'webmethod';
+
+    const uppiDiv = document.createElement('div');
+    uppiDiv.setAttribute('data-uppi-status', slug);
+    document.getElementById('uppi-container').appendChild(uppiDiv);
+
+    const script = document.createElement('script');
+    script.src = 'https://uppi.dev/embed/01jevha6t8qa251dz1a1p7bw6v/embed.js';
+    script.async = true;
+    script.defer = true;
+    document.body.appendChild(script);
+</script>
+
 <noscript><img src="https://sa.webmethod.eu/noscript.gif" alt="" referrerpolicy="no-referrer-when-downgrade" /></noscript>
 <script type="text/javascript">
     var _paq = window._paq = window._paq || [];
